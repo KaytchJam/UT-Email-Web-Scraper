@@ -5,9 +5,6 @@ from bs4 import BeautifulSoup
 header = "documents/"
 test_pages = tuple(["samplesite.html", "cockrellpage.html", "anthrpologypage.html"])
 
-#with open("documents/cockrellpage.html", encoding='UTF-8') as myFile:
- #   soup = BeautifulSoup(myFile, features="html.parser",)
-
 # Printing Tag fields
 # tag = soup.h
 # print(tag)
@@ -28,7 +25,14 @@ for page_index in range(len(test_pages)):
         # loop through all 'a' tags, check if it has an email attribute'
         #Cockrell & Natural Science method
         attributeList = tag.get_attribute_list('href')
-        print(attributeList)
+
+        if len(attributeList) < 1:
+            continue
+        else:
+            num = 1
+            num = num + num
+            print(num)
+
 
         if "email" in tag.get_attribute_list('class'):
             #print(str(counter) + ".")
