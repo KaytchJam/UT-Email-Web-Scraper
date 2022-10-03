@@ -2,14 +2,16 @@ import email
 from operator import contains
 from bs4 import BeautifulSoup
 
+# general test file header
 header = "documents/"
+mail_identifier = "mailto:"
+# files we'll be using for testing
 test_pages = tuple(["samplesite.html", "cockrellpage.html", "anthropologypage.html"])
 
-# Printing Tag fields
-# tag = soup.h
-# print(tag)
-# print(type(tag))
-# print(tag.name)
+# TODO
+# listing which school/college each set of emails is from
+# get the web scraper to work
+# figure out the upload process (get all the emails onto a document or spreadsheet)
 
 counter = 1
 # loop through list of pages
@@ -18,7 +20,7 @@ for page_index in range(len(test_pages)):
     with open("documents/" + test_pages[page_index], encoding="utf-8") as myPage:
         soup = BeautifulSoup(myPage, features="html.parser")
 
-    all_a = soup.findAll('a')
+    all_a = soup.findAll('a') # get all link tags
     email_list = list()
 
     for tag in all_a:
@@ -27,12 +29,13 @@ for page_index in range(len(test_pages)):
         attributeList = tag.get_attribute_list('href')
 
         if len(attributeList) < 1:
-            continue
+            continue #skip
         else:
             ref_string = attributeList[0]
-            if ref_string[0:6] == "mailto":
-                print(str(counter) + ".")
-                print(ref_string)
+            if len(ref_string) > 6 and ref_string[0:6] == "mailto":
+                email = ref_string[8:len(ref_string)]
+                print(str(counter) + "." + email)
+                email_list.append(email)
                 counter += 1
 
 
