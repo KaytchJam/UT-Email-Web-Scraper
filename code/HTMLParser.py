@@ -1,4 +1,3 @@
-import email
 from operator import contains
 from bs4 import BeautifulSoup
 
@@ -20,10 +19,10 @@ for page_index in range(len(test_pages)):
     with open("documents/" + test_pages[page_index], encoding="utf-8") as myPage:
         soup = BeautifulSoup(myPage, features="html.parser")
 
-    all_a = soup.findAll('a') # get all link tags
+    all_link_tags = soup.findAll('a') # get all link tags
     email_list = list()
 
-    for tag in all_a:
+    for tag in all_link_tags:
         # loop through all 'a' tags, check if it has an email attribute'
         #Cockrell & Natural Science method
         attributeList = tag.get_attribute_list('href')
@@ -33,9 +32,9 @@ for page_index in range(len(test_pages)):
         else:
             ref_string = attributeList[0]
             if len(ref_string) > 6 and ref_string[0:6] == "mailto":
-                email = ref_string[8:len(ref_string)]
-                print(str(counter) + "." + email)
-                email_list.append(email)
+                an_email = ref_string[8:len(ref_string)]
+                print(str(counter) + "." + an_email)
+                email_list.append(an_email)
                 counter += 1
 
 
