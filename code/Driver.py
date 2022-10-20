@@ -9,6 +9,7 @@ driver = webdriver.Edge(service=service)
 
 # navigating to web page (opening it)
 # driver.get("https://liberalarts.utexas.edu/academics/departments.html")
+# s = beautifulSoup(driver.page_source, 'html.parser')
 # driver.back() to go back a page
 
 # navigate the liberal arts departments page:
@@ -18,3 +19,7 @@ driver = webdriver.Edge(service=service)
             # add the link to the end of the current url
             # get all emails 
             # go back and repeat with next office-item tag
+
+driver.get("https://liberalarts.utexas.edu/academics/departments.html")
+s = BeautifulSoup(driver.page_source, 'html.parser')
+
