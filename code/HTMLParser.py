@@ -46,9 +46,9 @@ for page_index in range(len(test_pages)):
                     if len(ref_string) > 6 and ref_string[0:6] == "mailto":
                         an_email = ref_string[7:len(ref_string)]
                         email_file.write(an_email + "\n")
-    except: 
+    except FileExistsError: 
         # if the file already exists, simply skip it
-        print("Skipped creation of file: " + STORAGE_FILE)
+        print("File already exists: " + STORAGE_FILE)
         continue
         
             
