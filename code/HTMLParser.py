@@ -29,23 +29,27 @@ for page_index in range(len(test_pages)):
     STORAGE_FILE = DIRECTORY_HEADER + page_names[page_index] + FILE_TYPE
 
     # create a new email file
-    with open(STORAGE_FILE, 'w') as email_file:
+    try:
+        with open(STORAGE_FILE, 'x') as email_file:
+            for tag in all_link_tags:
+                # loop through all 'a' tags, check if it has an email attribute'
+                #Cockrell & Natural Science method
+                attributeList = tag.get_attribute_list('href')
 
-        for tag in all_link_tags:
-            # loop through all 'a' tags, check if it has an email attribute'
-            #Cockrell & Natural Science method
-            attributeList = tag.get_attribute_list('href')
+                # does this element contain an href attribute?
+                if (attributeList[0] is None):
+                    continue
+                else:
+                    ref_string = attributeList[0]
 
-            # does this element contain an href attribute?
-            if (attributeList[0] is None):
-                continue
-            else:
-                ref_string = attributeList[0]
-
-                # do any hrefs in this element contain mail links?
-                if len(ref_string) > 6 and ref_string[0:6] == "mailto":
-                    an_email = ref_string[7:len(ref_string)]
-                    email_file.write(an_email + "\n")
+                    # do any hrefs in this element contain mail links?
+                    if len(ref_string) > 6 and ref_string[0:6] == "mailto":
+                        an_email = ref_string[7:len(ref_string)]
+                        email_file.write(an_email + "\n")
+    except: 
+        # if the file already exists, simply skip it
+        print("Skipped creation of file: " + STORAGE_FILE)
+        continue
         
             
 
