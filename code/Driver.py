@@ -1,9 +1,10 @@
 from selenium.webdriver.edge.service import Service
 from selenium import webdriver
+from selenium.webdriver.common.by import By
 from operator import contains
 from bs4 import BeautifulSoup
 
-DRIVER_PATH = "C:\Users\kaytc\edgedriver_win64\msedgedriver.exe"
+DRIVER_PATH = r"C:\Users\kaytc\edgedriver_win64\msedgedriver.exe"
 service = Service(executable_path=DRIVER_PATH)
 driver = webdriver.Edge(service=service)
 
@@ -22,4 +23,8 @@ driver = webdriver.Edge(service=service)
 
 driver.get("https://liberalarts.utexas.edu/academics/departments.html")
 s = BeautifulSoup(driver.page_source, 'html.parser')
+department_list = driver.find_element(By.CLASS_NAME, "offices-list")
+print("I got to this line")
+print(department_list)
+driver.quit()
 
