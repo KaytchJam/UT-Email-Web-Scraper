@@ -3,12 +3,13 @@ from bs4 import BeautifulSoup
 
 # general test file header
 header = "documents/"
-MAIL_IDENTIFIER = "mailto:"
+MAIL_IDENTIFIER = "mailto"
 
 # files we'll be using for testing
 SCHOOL_FACULTY_HTML_FILES = tuple(["naturalscipage.html", "cockrellpage.html", "anthropologypage.html", "jacksongeosciencepage.html", "fineartspage.html", "lawschoolpage.html",
                                     "nursingschoolpage.html", "stevehickssocialworkpage.html"])
-EMAIL_FILE_NAMES = tuple(["Natural_Sci_Emails", "Cockrell_Engineering_Emails", "Anthropology_Emails", "Jackson_Geoscience_Emails", "Fine_Arts_Emails", "Law_School_Emails"])
+EMAIL_FILE_NAMES = tuple(["Natural_Sci_Emails", "Cockrell_Engineering_Emails", "Anthropology_Emails", "Jackson_Geoscience_Emails", "Fine_Arts_Emails", "Law_School_Emails", 
+                                    "Nursing_School_Emails", "Steve_Hicks_SocialWork_Emails"])
 
 # headers for file creation
 DIRECTORY_HEADER = "email_files/"
@@ -40,7 +41,7 @@ for page_index in range(len(SCHOOL_FACULTY_HTML_FILES)):
 
     # create a new email file
     try:
-        with open(STORAGE_FILE, 'x') as email_file:
+        with open(STORAGE_FILE, 'w') as email_file:
             for tag in all_link_tags:
                 # loop through all 'a' tags, check if it has an email attribute'
                 #Cockrell & Natural Science method
@@ -51,8 +52,9 @@ for page_index in range(len(SCHOOL_FACULTY_HTML_FILES)):
                     continue
                 else:
                     ref_string = attributeList[0]
-
                     # do any hrefs in this element contain mail links?
+
+                    #print("PAGE PRINTED: " + str(len(ref_string) > 6))
                     if len(ref_string) > 6 and ref_string[0:6] == MAIL_IDENTIFIER:
                         an_email = ref_string[7:len(ref_string)]
                         email_file.write(an_email + "\n")

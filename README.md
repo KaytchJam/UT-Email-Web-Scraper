@@ -21,7 +21,7 @@
 7. School of Architecture https://soa.utexas.edu/about/faculty
 8. School of Information https://www.ischool.utexas.edu/people/ischool-faculty-staff-students
 
-#### Faculty pages that don't need Selenium
+#### Faculty pages that don't need Selenium (Maybe just a way to go the next page)
 
 1. Cockrell School of Engineering
 2. College of Fine Arts
