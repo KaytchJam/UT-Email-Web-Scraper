@@ -3,6 +3,8 @@
 
 #### Web Scrapper for consolidating a bunch of emails from various UT Austin departments. The emails are being collected using the Beautiful Soup and Selenium Python libraries. 
 
+![Give me your emails](https://i.imgflip.com/4bogsd.jpg)
+
 ### Todo List: 
 
 - [x] Implementing the Selenium Edge Driver 
