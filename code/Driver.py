@@ -81,8 +81,9 @@ try:
     #         continue
 
     next_page_directories = tuple(["https://cns.utexas.edu/directory/items/1-directory", "https://pharmacy.utexas.edu/directory",
-                                    "https://lbj.utexas.edu/faculty-lbj-school-public-affairs", "https://socialwork.utexas.edu/directory/"])
-    directory_names = tuple(["naturalscience", "pharmacy", "lbjpublic", "stevehickssocial"])
+                                    "https://lbj.utexas.edu/faculty-lbj-school-public-affairs", "https://socialwork.utexas.edu/directory/", 
+                                    "https://dellmed.utexas.edu/directory?page=1"])
+    directory_names = tuple(["naturalscience", "pharmacy", "lbjpublic", "stevehickssocial", "dellmedical"])
 
     counter = -1
     for directory in next_page_directories:
