@@ -7,6 +7,7 @@ from selenium.webdriver.support.ui import WebDriverWait
 from selenium.common.exceptions import TimeoutException
 from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.common.by import By
+import re
 
 class Email_Parser:
     DIRECTORY_HEADER = "email_files"
@@ -59,6 +60,21 @@ class Email_Parser:
                     email_string = current_href_string[7:len(current_href_string)]
                     # print(email_string)
                     operation(email_string)
+    
+    def get_next(page_HTML):
+        soup = BeautifulSoup(page_HTML, features="html.parser")
+        regex = re.compile('.*pag.*') # regular expression for elements with "pag" string in class
+        all_with_pag = soup.findAll("div", regex)
+
+        if len(all_with_pag) < 1:
+            all_with_pag = soup.findAll('nav', {'class' : regex})
+        print(all_with_pag)
+        return
+
+        
+
+
+
 
 # helps parse the stuff on the liberal arts page
 class Liberal_Arts_Parser:

@@ -34,83 +34,59 @@ driver = webdriver.Edge(service=service)
                 # go back and repeat with next office-item tag
 try:
     # in the liberal arts general directory
-    driver.implicitly_wait(2)
-    driver.get("https://liberalarts.utexas.edu/academics/departments.html")
-    department_list = driver.find_element(By.CLASS_NAME, "offices-list")
-    dpt_links = Liberal_Arts_Parser.get_department_links(driver.page_source)
+    # driver.implicitly_wait(5)
+    # driver.get("https://liberalarts.utexas.edu/academics/departments.html")
+    # department_list = driver.find_element(By.CLASS_NAME, "offices-list")
+    # dpt_links = Liberal_Arts_Parser.get_department_links(driver.page_source)
 
-    for dpt in dpt_links:
-        print(dpt)
-        header = "https://liberalarts.utexas.edu"
-        driver.get(header + dpt)
-        get_nav = driver.find_element(By.ID, "main-nav")
-        nav_items = get_nav.find_elements(By.TAG_NAME, "a")
+    # for dpt in dpt_links:
+    #     print(dpt)
+    #     header = "https://liberalarts.utexas.edu"
+    #     driver.get(header + dpt)
+    #     get_nav = driver.find_element(By.ID, "main-nav")
+    #     nav_items = get_nav.find_elements(By.TAG_NAME, "a")
+    #     delay = 4
 
-        faculty = Liberal_Arts_Parser.get_faculty_link(driver.page_source)
+    #     print("waiting for faculty element")
+    #     try:
+    #         # this is filler to get the page to load
+    #         filler_element = WebDriverWait(driver, delay).until(EC.text_to_be_present_in_element((By.TAG_NAME, "a"), " Faculty & Research " ))
+    #     except TimeoutException:
+    #         print("Took too long")
 
-        # print("going to faculty")
-        driver.get(header + faculty)
-        delay = 9 # seconds
+    #     faculty = Liberal_Arts_Parser.get_faculty_link(driver.page_source)
+    #     if faculty is None: continue
+    #     driver.get(header + faculty)
+    #     delay = 9 # seconds
 
-         # print("waiting")
-        try:
-            filler_element = WebDriverWait(driver, delay).until(EC.presence_of_element_located((By.CLASS_NAME, "fac-info")))
-        except TimeoutException:
-            print("Took too long")
+    #      # print("waiting")
+    #     try:
+    #         filler_element = WebDriverWait(driver, delay).until(EC.presence_of_element_located((By.CLASS_NAME, "fac-info")))
+    #     except TimeoutException:
+    #         print("Took too long")
         
-        html = driver.find_element(By.TAG_NAME, "html")
-        outer_html = html.get_attribute("outerHTML")
-        s = BeautifulSoup(outer_html, features='html.parser')
-        print("writing to file")
-        all_tags = BeautifulSoup(outer_html, features='html.parser').findAll('a')
+    #     html = driver.find_element(By.TAG_NAME, "html")
+    #     outer_html = html.get_attribute("outerHTML")
+    #     s = BeautifulSoup(outer_html, features='html.parser')
+    #     print("writing to file")
+    #     all_tags = BeautifulSoup(outer_html, features='html.parser').findAll('a')
 
-        # print("EMAIL SET: ")
-        try:
-            with open("email_files" + dpt + ".txt", 'w') as email_file:
-                EP = Email_Parser("mailto", email_file)
-                EP.email_stream(EP.write_to_file, all_tags)
-        except FileExistsError:
-            continue
-
-
-
-
-    # department_at = department_list.find_elements(By.CLASS_NAME, "offices-item")
-    # department_link = department_at[0].find_element(By.TAG_NAME, "a")
-
-    # # in the AADS department
-    # driver.get(department_link.get_property('href'))
-    # print("AT AADS PAGE")
-    # get_nav = driver.find_element(By.ID, "main-nav")
-    # nav_items = get_nav.find_elements(By.TAG_NAME, "a")
-    # faculty = nav_items[1]
-
-    # # aads faculty page
-    # driver.get(faculty.get_property("href"))
-    # print("AT AADS FACULTY PAGE")
-    
-    # delay = 5 #seconds 
-    # try:
-    #     filler_element = WebDriverWait(driver, delay).until(EC.presence_of_element_located((By.CLASS_NAME, "fac-info")))
-    # except TimeoutException:
-    #     print("Took too long")
-
-    # html = driver.find_element(By.TAG_NAME, "html")
-    # outer_html = html.get_attribute("outerHTML")
-    # s = BeautifulSoup(outer_html, features='html.parser')
-    # all_tags = s.findAll('a')
-
-    # print("WE GET DOWN HERE?")
-    # #print(all_tags)
-    # for tag in all_tags:
-    #     at_list = tag.get_attribute_list("href")
-    #     if at_list[0] is None:
+    #     # print("EMAIL SET: ")
+    #     try:
+    #         with open("email_files" + dpt + ".txt", 'x') as email_file:
+    #             EP = Email_Parser("mailto", email_file)
+    #             EP.email_stream(EP.write_to_file, all_tags)
+    #     except FileExistsError:
     #         continue
-    #     else:
-    #         ref_string = at_list[0]
-    #         if len(ref_string) > 6 and ref_string[0:6] == "mailto":
-    #             print(ref_string[7:len(ref_string)])
-            
+
+    next_page_directories = tuple(["https://cns.utexas.edu/directory/items/1-directory", "https://pharmacy.utexas.edu/directory",
+                                    "https://lbj.utexas.edu/faculty-lbj-school-public-affairs", "https://socialwork.utexas.edu/directory/"])
+    directory_names = tuple(["naturalscience", "pharmacy", "lbjpublic", "stevehickssocial"])
+
+    for directory in next_page_directories:
+        driver.get(directory)
+        Email_Parser.get_next(driver.page_source)
+
 except NotImplementedError:
     print("Problem?")
     driver.quit()

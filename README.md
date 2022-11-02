@@ -5,10 +5,49 @@
 
 ### Todo List: 
 
-- [ ] Implementing the Selenium Edge Driver 
+- [x] Implementing the Selenium Edge Driver 
 - [x] Extracting emails from all the pages (where it can be done without selenium)
+- [x] Extracting emails from most of the Liberal Arts Directories
 - [ ] Adding all the emails to the drive
 - [ ] Figuring out how to automate the email sending process (?)
+
+### Checklist:
+- [x] Cockrell School of Engineering
+- [x] Jackson School of Geoscience
+- [x] College of Fine Arts
+- [x] Texas School of Law
+- [x] School of Nursing
+- [ ] Steve Hicks School of Social Work
+- [ ] College of Natural Sciences
+- [ ] School of Architecture
+- [ ] School of Information
+
+### Liberal Arts Checklist:
+- [x] African Studies
+- [x] Air & Air Space Force Science
+- [x] American Studies
+- [x] Anthropology
+- [x] Asian Studies
+- [x] Classics
+- [x] Economics
+- [x] English
+- [x] French and Italian
+- [ ] Geography & Environment
+- [x] Germanic Studies
+- [x] Government
+- [x] History
+- [x] Linguistics
+- [x] Mexican American and Latina/o Studies
+- [x] Middle Eastern Studies
+- [ ] Military Science
+- [x] Naval Science
+- [ ] Philosophy
+- [x] Pyschology
+- [ ] Religious Studies
+- [x] Rhetoric and Writing
+- [x] Slavic & Eurasian Studies
+- [x] Sociology
+- [x] Spanish & Portugeuse
 
 #### Faculty pages that need to be handled with Selenium
 
