@@ -103,7 +103,7 @@ try:
                     # were any files written ?
                     if write_made == False:
                         print("no writes made, try other method")
-                        break # temporary solution is to break to i actually work on it 
+                        break # temporary solution is to break till i actually work on it 
 
                     next_link = EP.get_next(driver.page_source)
                     print(next_link)
