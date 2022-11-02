@@ -1,3 +1,4 @@
+from asyncore import write
 from io import TextIOWrapper
 from operator import contains
 from bs4 import BeautifulSoup
@@ -46,6 +47,7 @@ class Email_Parser:
     
     # from a given list of Beautiful Soup tags, return a stream of strings of emails contained in the tags and perform "operation" on them
     def email_stream(self, operation = write_to_file, tag_list = None):
+        write_made = False
         if tag_list is None:
             print("tag list is None")
             return 
@@ -58,23 +60,51 @@ class Email_Parser:
                 current_href_string = attr_list[0]
                 if len(current_href_string) > 6 and current_href_string[0:6] == "mailto":
                     email_string = current_href_string[7:len(current_href_string)]
-                    # print(email_string)
+                    write_made = True
                     operation(email_string)
-    
-    def get_next(page_HTML):
+        return write_made
+
+    # Check if the child element of some tag type of another element in a resultSet (parent_list) has a specified innerText
+    def __find_child_with_tag_and_text(self, parent_list = None, tag = None, innerText = None):
+        if parent_list is None or tag is None or innerText is None:
+            return None
+
+        tag = tag.lower()
+        innerText = innerText.lower()
+
+        for parent in parent_list:
+            found = False
+            for child_element in parent.findAll(tag):
+                if innerText in child_element.getText().lower():
+                    return child_element
+        return None
+
+    # Removes elements from a string from index 0 to the first index of the special character
+    def remove_until_character(self, link = None, special_character = "?"):
+        if link is None: return None
+        while link[0] != special_character:
+            link = link[1:len(link)]
+        return link
+
+    # Returns the link to the next page in a faculty directory
+    def get_next(self, page_HTML):
         soup = BeautifulSoup(page_HTML, features="html.parser")
         regex = re.compile('.*pag.*') # regular expression for elements with "pag" string in class
-        all_with_pag = soup.findAll("div", regex)
-
-        if len(all_with_pag) < 1:
-            all_with_pag = soup.findAll('nav', {'class' : regex})
-        print(all_with_pag)
-        return
-
+        div_with_pag = soup.findAll("div", {'class' : regex})
+        nav_with_pag = soup.findAll('nav', {'class' : regex})
         
+        next_page_a = self.__find_child_with_tag_and_text(div_with_pag, 'a', 'next')
+        if next_page_a is None:
+            next_page_a = self.__find_child_with_tag_and_text(nav_with_pag, 'a', 'next')
 
-
-
+        if next_page_a is not None:
+            ref_list = next_page_a.get_attribute_list("href")
+            if ref_list[0] is not None:
+                return ref_list[0]
+            else: # assume we're on the Steve Hicks site if there's no match
+                ref_list = next_page_a.get_attribute_list("data-page")
+                return "?_paged=" + ref_list[0]
+        return None
 
 # helps parse the stuff on the liberal arts page
 class Liberal_Arts_Parser:
@@ -94,48 +124,16 @@ class Liberal_Arts_Parser:
 
     # return the link that takes us to the faculty page for a given department
     def get_faculty_link(page_HTML):
-        print("here")
         soup = BeautifulSoup(page_HTML, features="html.parser")
         nav_list = soup.findAll('nav', class_="subnav")
-        print(nav_list)
         nav_list = nav_list[0].findAll('a')
-        print(nav_list)
-        print("nav loop")
+
         for nav_link in nav_list:
             print(nav_link['href'])
             if "faculty" in nav_link['href']:
                 return nav_link['href']
         
         return None
-
-
-    def _failed_preconditions(driver, d_list_or_link):
-        if d_list_or_link is None:
-            print("department list/link is none")
-            return True
-        elif driver is None:
-            print("driver is none")
-            return True
-        return False
-
-    # navigate to a liberal art department's faculty page from a given department link
-    def get_to_faculty_page_outerHTML(self, driver, department_link):
-        if self._failed_preconditions(driver, department_link):
-            return None
-
-        driver.get(department_link.get_property('href'))
-        get_nav = driver.find_element(By.ID, "main-nav")
-        nav_items = get_nav.find_elements(By.TAG_NAME, "a")
-        faculty_nav_item = nav_items[1]
-        driver.get(faculty_nav_item.get_property("href"))
-        delay = 5 #seconds 
-        try:
-            filler_element = WebDriverWait(driver, delay).until(EC.presence_of_element_located((By.CLASS_NAME, "fac-info")))
-        except TimeoutException:
-            print("Took too long")
-
-        html = driver.find_element(By.TAG_NAME, "html")
-        return html.get_attribute("outerHTML")
 
         
             

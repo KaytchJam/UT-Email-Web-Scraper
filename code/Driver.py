@@ -1,3 +1,4 @@
+import email
 from logging import NullHandler
 from sre_parse import WHITESPACE
 from selenium.webdriver.edge.service import Service
@@ -83,9 +84,35 @@ try:
                                     "https://lbj.utexas.edu/faculty-lbj-school-public-affairs", "https://socialwork.utexas.edu/directory/"])
     directory_names = tuple(["naturalscience", "pharmacy", "lbjpublic", "stevehickssocial"])
 
+    counter = -1
     for directory in next_page_directories:
+        counter = counter + 1
         driver.get(directory)
-        Email_Parser.get_next(driver.page_source)
+        print(directory_names[counter])
+        current_link = directory
+
+        try:
+            with open("email_files/" + directory_names[counter] + ".txt", 'x') as email_file:
+                EP = Email_Parser("mailto", email_file)
+                while current_link is not None:
+                    driver.get(current_link)
+
+                    all_tags = BeautifulSoup(driver.page_source, features="html.parser").findAll('a')
+                    write_made = EP.email_stream(EP.write_to_file, all_tags)
+
+                    # were any files written ?
+                    if write_made == False:
+                        print("no writes made, try other method")
+                        break # temporary solution is to break to i actually work on it 
+
+                    next_link = EP.get_next(driver.page_source)
+                    print(next_link)
+                    if next_link is not None: 
+                        next_link = directory + EP.remove_until_character(next_link, '?')
+                    current_link = next_link
+        except FileExistsError:
+            print("File " + directory_names[counter] + " already exists.")
+            continue
 
 except NotImplementedError:
     print("Problem?")

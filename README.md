@@ -7,6 +7,7 @@
 
 - [x] Implementing the Selenium Edge Driver 
 - [x] Extracting emails from all the pages (where it can be done without selenium)
+- [ ] Figure out In-N-Out Selenium navigation method
 - [x] Extracting emails from most of the Liberal Arts Directories
 - [ ] Adding all the emails to the drive
 - [ ] Figuring out how to automate the email sending process (?)
@@ -17,10 +18,15 @@
 - [x] College of Fine Arts
 - [x] Texas School of Law
 - [x] School of Nursing
-- [ ] Steve Hicks School of Social Work
-- [ ] College of Natural Sciences
+- [x] Steve Hicks School of Social Work
+- [x] College of Natural Sciences
 - [ ] School of Architecture
 - [ ] School of Information
+- [ ] College of Pharamacy
+- [ ] Mccombs School of Business
+- [ ] Dell Medical School
+- [ ] LBJ School of Public Affairs
+- [ ] Moody College of Communication
 
 ### Liberal Arts Checklist:
 - [x] African Studies
