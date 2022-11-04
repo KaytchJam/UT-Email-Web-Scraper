@@ -84,6 +84,7 @@ try:
                                     "https://lbj.utexas.edu/faculty-lbj-school-public-affairs", "https://socialwork.utexas.edu/directory/", 
                                     "https://dellmed.utexas.edu/directory?page=1"])
     directory_names = tuple(["naturalscience", "pharmacy", "lbjpublic", "stevehickssocial", "dellmedical"])
+    DELLMED_NEXT_CONSTANT = "javascript:void(0)"
 
     counter = -1
     for directory in next_page_directories:
@@ -108,7 +109,9 @@ try:
 
                     next_link = EP.get_next(driver.page_source)
                     print(next_link)
-                    if next_link is not None: 
+                    if next_link is not None:
+                        if next_link == DELLMED_NEXT_CONSTANT:
+                            current_link = current_link + "1"
                         next_link = directory + EP.remove_until_character(next_link, '?')
                     current_link = next_link
         except FileExistsError:

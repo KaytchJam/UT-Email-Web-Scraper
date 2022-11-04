@@ -73,7 +73,6 @@ class Email_Parser:
         innerText = innerText.lower()
 
         for parent in parent_list:
-            found = False
             for child_element in parent.findAll(tag):
                 if innerText in child_element.getText().lower():
                     return child_element
@@ -82,6 +81,15 @@ class Email_Parser:
     def __find_child_with_class_next(self, parent_list = None, tag = None, element_class = None):
         if parent_list is None or tag is None or element_class is None:
             return None
+
+        true_a_list = None
+        for parent in parent_list:
+            temp_a_list = parent.findAll(tag, class_= element_class)
+            if temp_a_list[0] is not None and (true_a_list is None or (len(true_a_list) < len(temp_a_list))):
+                true_a_list = temp_a_list
+        return true_a_list
+
+
         
 
 
@@ -109,6 +117,7 @@ class Email_Parser:
 
 
         if next_page_a is not None:
+            if next_is_class: return next_page_a # the dell medical case
             ref_list = next_page_a.get_attribute_list("href")
             if ref_list[0] is not None:
                 return ref_list[0]
