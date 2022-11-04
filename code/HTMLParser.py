@@ -78,6 +78,12 @@ class Email_Parser:
                 if innerText in child_element.getText().lower():
                     return child_element
         return None
+    
+    def __find_child_with_class_next(self, parent_list = None, tag = None, element_class = None):
+        if parent_list is None or tag is None or element_class is None:
+            return None
+        
+
 
     # Removes elements from a string from index 0 to the first index of the special character
     def remove_until_character(self, link = None, special_character = "?"):
@@ -93,9 +99,14 @@ class Email_Parser:
         div_with_pag = soup.findAll("div", {'class' : regex})
         nav_with_pag = soup.findAll('nav', {'class' : regex})
         
+        next_is_class = False
         next_page_a = self.__find_child_with_tag_and_text(div_with_pag, 'a', 'next')
         if next_page_a is None:
             next_page_a = self.__find_child_with_tag_and_text(nav_with_pag, 'a', 'next')
+        if next_page_a is None:
+            next_page_a = self.__find_child_with_class_next(div_with_pag, 'a', 'next') # exclusive to dell medical page
+            next_is_class = next_page_a is None  if False else True
+
 
         if next_page_a is not None:
             ref_list = next_page_a.get_attribute_list("href")
