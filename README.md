@@ -3,7 +3,7 @@
 
 #### Web Scrapper for consolidating a bunch of emails from various UT Austin departments. The emails are being collected using the Beautiful Soup and Selenium Python libraries. 
 
-![Give me your emails](https://i.imgflip.com/4bogsd.jpg)
+![Give me your emails](https://github.com/KaytchJam/UT-Email-Web-Scraper/blob/main/documents/give_me_your_email_expanded.png?raw=true)
 
 ### Todo List: 
 
