@@ -26,7 +26,7 @@
 - [ ] School of Information
 - [ ] College of Pharamacy
 - [ ] Mccombs School of Business
-- [ ] Dell Medical School
+- [x] Dell Medical School
 - [ ] LBJ School of Public Affairs
 - [ ] Moody College of Communication
 
