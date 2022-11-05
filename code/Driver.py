@@ -108,11 +108,13 @@ try:
                         break # temporary solution is to break till i actually work on it 
 
                     next_link = EP.get_next(driver.page_source)
-                    print(next_link)
                     if next_link is not None:
                         if next_link == DELLMED_NEXT_CONSTANT:
-                            current_link = current_link + "1"
-                        next_link = directory + EP.remove_until_character(next_link, '?')
+                            print(page_number)
+                            page_number = int(current_link[len(current_link)-1:len(current_link)]) + 1
+                            next_link = current_link[0:len(current_link)-1] + str(page_number)
+                        # General case
+                        else: next_link = directory + EP.remove_until_character(next_link, '?')
                     current_link = next_link
         except FileExistsError:
             print("File " + directory_names[counter] + " already exists.")

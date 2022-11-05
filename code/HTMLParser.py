@@ -81,17 +81,14 @@ class Email_Parser:
     def __find_child_with_class_next(self, parent_list = None, tag = None, element_class = None):
         if parent_list is None or tag is None or element_class is None:
             return None
-
         true_a_list = None
         for parent in parent_list:
             temp_a_list = parent.findAll(tag, class_= element_class)
             if temp_a_list[0] is not None and (true_a_list is None or (len(true_a_list) < len(temp_a_list))):
                 true_a_list = temp_a_list
-        return true_a_list
-
-
-        
-
+                if "disabled" in true_a_list[0].get_attribute_list("class"): return None
+                return true_a_list
+        return None
 
     # Removes elements from a string from index 0 to the first index of the special character
     def remove_until_character(self, link = None, special_character = "?"):
@@ -115,9 +112,8 @@ class Email_Parser:
             next_page_a = self.__find_child_with_class_next(div_with_pag, 'a', 'next') # exclusive to dell medical page
             next_is_class = next_page_a is None  if False else True
 
-
         if next_page_a is not None:
-            if next_is_class: return next_page_a # the dell medical case
+            if next_is_class: return next_page_a[0].get_attribute_list("href")[0] # the dell medical case
             ref_list = next_page_a.get_attribute_list("href")
             if ref_list[0] is not None:
                 return ref_list[0]
