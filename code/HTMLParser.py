@@ -122,6 +122,45 @@ class Email_Parser:
                 return "?_paged=" + ref_list[0]
         return None
 
+    def split_at_target(self, full_word, target_string):
+        offset = 0
+        for i in range(len(full_word)):
+            if full_word[i] == target_string[offset]:
+                offset = offset + 1
+            else:
+                offset = 0
+
+            if offset == len(target_string):
+                return full_word[0:(i - offset)]
+        return full_word
+
+    def split_after_target(self, full_word, target_string):
+        offset = 0
+        for i in range(len(full_word)):
+            if full_word[i] == target_string[offset]: offset = offset + 1
+            else: offset = 0
+            if offset == len(target_string): return full_word[0:i]
+        return full_word
+
+
+        
+
+    def get_subdirectories(self, page_HTML, tag):
+        soup = BeautifulSoup(page_HTML, features="html.parser")
+        #regex = re.compile('.*views-element-container.*|.*field.*|.*directory__cards.*|.*block-main-page-content.*|.*view-content.*|.*faculty-bio-view.*|.*block-moody-main-page-content.*')
+        regex = re.compile('.*layout-content.*')
+        div_with_links = soup.find("div", {'class' : regex})
+        link_elements = div_with_links.findAll(tag)
+        subdirectory_links = list()
+
+        for element in link_elements:
+            subdirectory_links.append(element.get_attribute_list("href")[0])
+        return subdirectory_links
+
+
+
+
+
 # helps parse the stuff on the liberal arts page
 class Liberal_Arts_Parser:
 
@@ -150,17 +189,3 @@ class Liberal_Arts_Parser:
                 return nav_link['href']
         
         return None
-
-        
-            
-
-
-        
-            
-
-
-            
-
-
-
- 
