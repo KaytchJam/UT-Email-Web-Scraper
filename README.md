@@ -24,6 +24,7 @@
 - [x] College of Natural Sciences
 - [ ] School of Architecture
 - [ ] School of Information
+- [x] School of Education
 - [x] College of Pharamacy
 - [x] Mccombs School of Business
 - [x] Dell Medical School
