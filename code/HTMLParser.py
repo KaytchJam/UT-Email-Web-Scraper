@@ -150,7 +150,7 @@ class Email_Parser:
     # If each faculty member gets their own page, this method returns a list with links to each page
     def get_subdirectories(self, page_HTML, tag):
         soup = BeautifulSoup(page_HTML, features="html.parser")
-        regex = re.compile('.*layout-content.*|.*view-content.*|.*directory__cards.*|.*field_utexas_promo_units.*|.*faculty-bio-view.*')
+        regex = re.compile('.*layout-content.*|.*view-content.*|.*directory__cards.*|.*field_utexas_promo_units.*|.*faculty-bio-view.*|.*views-view-grid.*')
         div_with_links = soup.find("div", {'class' : regex})
         #print(div_with_links)
         link_elements = div_with_links.findAll(tag)

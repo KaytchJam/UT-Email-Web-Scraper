@@ -105,7 +105,7 @@ try:
         elif directory_at == 7: #moodycommunication
             new_link = current_page_link[0:24] + sub_directory_link
         elif directory_at == 8: #architecture
-            new_link = 6
+            new_link = current_page_link[0:22] + sub_directory_link
         elif directory_at == 9: #information
             new_link = 7
         return new_link
@@ -140,6 +140,8 @@ try:
                         prev = None
                         for link in subdirectory_links_list:
                             if prev == link: continue
+                            if 'index.php' in link: continue
+                            
                             #print(link)
                             sub_link = get_link_formatting(counter, link, current_link)
                             #print(sub_link)
