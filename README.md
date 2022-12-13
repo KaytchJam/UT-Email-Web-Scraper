@@ -22,14 +22,14 @@
 - [x] School of Nursing
 - [x] Steve Hicks School of Social Work
 - [x] College of Natural Sciences
-- [ ] School of Architecture
+- [x] School of Architecture
 - [ ] School of Information
 - [x] School of Education
 - [x] College of Pharamacy
 - [x] Mccombs School of Business
 - [x] Dell Medical School
 - [x] LBJ School of Public Affairs
-- [ ] Moody College of Communication
+- [x] Moody College of Communication
 
 ### Liberal Arts Checklist:
 - [x] African Studies
