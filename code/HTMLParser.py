@@ -120,7 +120,10 @@ class Email_Parser:
             else: # assume we're on the Steve Hicks site if there's no match
                 ref_list = next_page_a.get_attribute_list("data-page")
                 return "?_paged=" + ref_list[0]
-        return None
+        
+        a_with_arrow = soup.find('a', text = '>')
+        print(a_with_arrow)
+        return (a_with_arrow.get_attribute_list("href"))[0]
 
     def split_at_target(self, full_word, target_string):
         offset = 0
@@ -142,13 +145,10 @@ class Email_Parser:
             if offset == len(target_string): return full_word[0:i]
         return full_word
 
-
-        
-
     def get_subdirectories(self, page_HTML, tag):
         soup = BeautifulSoup(page_HTML, features="html.parser")
         #regex = re.compile('.*views-element-container.*|.*field.*|.*directory__cards.*|.*block-main-page-content.*|.*view-content.*|.*faculty-bio-view.*|.*block-moody-main-page-content.*')
-        regex = re.compile('.*layout-content.*|.*view-content.*')
+        regex = re.compile('.*layout-content.*|.*view-content.*|.*directory__cards.*')
         div_with_links = soup.find("div", {'class' : regex})
         #print(div_with_links)
         link_elements = div_with_links.findAll(tag)

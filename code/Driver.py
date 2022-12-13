@@ -96,7 +96,7 @@ try:
         elif directory_at == 2: #lbjpublic
             new_link = current_page_link[0:22] + sub_directory_link
         elif directory_at == 5: #mccombsbusiness
-            new_link = 3
+            new_link = current_page_link[0:31] + sub_directory_link
         elif directory_at == 6: #education
             new_link = 4
         elif directory_at == 7: #moodycommunication
@@ -147,6 +147,7 @@ try:
 
 
                     next_link = EP.get_next(driver.page_source)
+                    print(next_link)
                     if next_link is not None:
                         if next_link == DELLMED_NEXT_CONSTANT:
                             print(page_number)
