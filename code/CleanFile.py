@@ -6,6 +6,7 @@ prefix = "email_files/"
 with open(prefix + file1, 'r') as source:
 
     counter = 1
+    # copy over all odd numbered files
     with open(prefix + file2, 'x') as dest:
         for line in source:
             if counter == 2:
@@ -13,5 +14,3 @@ with open(prefix + file1, 'r') as source:
                 continue
             dest.write(line)
             counter = counter << 1
-
-
