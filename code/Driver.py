@@ -107,7 +107,7 @@ try:
         elif directory_at == 8: #architecture
             new_link = current_page_link[0:22] + sub_directory_link
         elif directory_at == 9: #information
-            new_link = 7
+            new_link = current_page_link[0:30] + sub_directory_link
         return new_link
 
     counter = -1
@@ -141,7 +141,7 @@ try:
                         for link in subdirectory_links_list:
                             if prev == link: continue
                             if 'index.php' in link: continue
-                            
+
                             #print(link)
                             sub_link = get_link_formatting(counter, link, current_link)
                             #print(sub_link)

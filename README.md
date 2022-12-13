@@ -23,7 +23,7 @@
 - [x] Steve Hicks School of Social Work
 - [x] College of Natural Sciences
 - [x] School of Architecture
-- [ ] School of Information
+- [x] School of Information
 - [x] School of Education
 - [x] College of Pharamacy
 - [x] Mccombs School of Business
