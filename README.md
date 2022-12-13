@@ -9,7 +9,7 @@
 
 - [x] Implementing the Selenium Edge Driver 
 - [x] Extracting emails from all the pages (where it can be done without selenium)
-- [ ] Figure out In-N-Out Selenium navigation method
+- [x] Figure out In-N-Out Selenium navigation method
 - [x] Extracting emails from most of the Liberal Arts Directories
 - [ ] Adding all the emails to the drive
 - [ ] Figuring out how to automate the email sending process (?)
