@@ -124,7 +124,8 @@ class Email_Parser:
         a_with_arrow = soup.find('a', text = '>')
         print(a_with_arrow)
         return (a_with_arrow.get_attribute_list("href"))[0]
-
+    
+    # String parsing helper method
     def split_at_target(self, full_word, target_string):
         offset = 0
         for i in range(len(full_word)):
@@ -137,6 +138,7 @@ class Email_Parser:
                 return full_word[0:(i - offset)]
         return full_word
 
+    # String parsing helper method
     def split_after_target(self, full_word, target_string):
         offset = 0
         for i in range(len(full_word)):
@@ -145,6 +147,7 @@ class Email_Parser:
             if offset == len(target_string): return full_word[0:i]
         return full_word
 
+    # If each faculty member gets their own page, this method returns a list with links to each page
     def get_subdirectories(self, page_HTML, tag):
         soup = BeautifulSoup(page_HTML, features="html.parser")
         regex = re.compile('.*layout-content.*|.*view-content.*|.*directory__cards.*|.*field_utexas_promo_units.*|.*faculty-bio-view.*')
