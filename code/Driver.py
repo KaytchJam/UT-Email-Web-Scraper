@@ -91,19 +91,19 @@ try:
 
     def get_link_formatting(directory_at, sub_directory_link, current_page_link):
         new_link = None
-        if directory_at == directory_names[1]: #pharmacy
-            new_link = current_page_link[0:37] + sub_directory_link[11:len(sub_directory_link)]
-        elif directory_at == directory_names[2]: #lbjpublic
+        if directory_at == 1: #pharmacy
+            new_link = current_page_link[0:37] + sub_directory_link[10:len(sub_directory_link)]
+        elif directory_at == 2: #lbjpublic
             new_link = 2
-        elif directory_at == directory_names[5]: #mccombsbusiness
+        elif directory_at == 5: #mccombsbusiness
             new_link = 3
-        elif directory_at == directory_names[6]: #education
+        elif directory_at == 6: #education
             new_link = 4
-        elif directory_at == directory_names[7]: #moodycommunication
+        elif directory_at == 7: #moodycommunication
             new_link = 5
-        elif directory_at == directory_names[8]: #architecture
+        elif directory_at == 8: #architecture
             new_link = 6
-        elif directory_at == directory_names[9]: #information
+        elif directory_at == 9: #information
             new_link = 7
         return new_link
 
@@ -135,6 +135,7 @@ try:
                         for link in subdirectory_links_list:
                             #print(link)
                             sub_link = get_link_formatting(counter, link, current_link)
+                            print(sub_link)
                             driver.get(sub_link)
                             all_tags = BeautifulSoup(driver.page_source, features="html.parser").findAll('a')
                             EP.email_stream(EP.write_to_file, all_tags)
