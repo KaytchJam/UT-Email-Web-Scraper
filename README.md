@@ -24,10 +24,10 @@
 - [x] College of Natural Sciences
 - [ ] School of Architecture
 - [ ] School of Information
-- [ ] College of Pharamacy
+- [x] College of Pharamacy
 - [ ] Mccombs School of Business
 - [x] Dell Medical School
-- [ ] LBJ School of Public Affairs
+- [x] LBJ School of Public Affairs
 - [ ] Moody College of Communication
 
 ### Liberal Arts Checklist:
