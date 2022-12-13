@@ -25,7 +25,7 @@
 - [ ] School of Architecture
 - [ ] School of Information
 - [x] College of Pharamacy
-- [ ] Mccombs School of Business
+- [x] Mccombs School of Business
 - [x] Dell Medical School
 - [x] LBJ School of Public Affairs
 - [ ] Moody College of Communication
@@ -64,9 +64,9 @@
 3. College of Pharamacy
 4. Dell Medical School
 5. LBJ School of Public Affairs
-6. Moody College of Communication https://moody.utexas.edu/faculty
-7. School of Architecture https://soa.utexas.edu/about/faculty
-8. School of Information https://www.ischool.utexas.edu/people/ischool-faculty-staff-students
+6. [Moody College of Communication](https://moody.utexas.edu/faculty)
+7. [School of Architecture](https://soa.utexas.edu/about/faculty)
+8. [School of Information](https://www.ischool.utexas.edu/people/ischool-faculty-staff-students)
 
 #### Faculty pages that don't need Selenium (Maybe just a way to go the next page)
 
