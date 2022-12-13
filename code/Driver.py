@@ -103,7 +103,7 @@ try:
         elif directory_at == 6: #education
             new_link = current_page_link[0:29] + sub_directory_link
         elif directory_at == 7: #moodycommunication
-            new_link = 5
+            new_link = current_page_link[0:24] + sub_directory_link
         elif directory_at == 8: #architecture
             new_link = 6
         elif directory_at == 9: #information

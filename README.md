@@ -90,7 +90,8 @@ parsed without using Selenium, however, accessing each faculty page in a timely 
 #### Additional Notes:
 
 The actual code for the Faculty pages that REQUIRE Selenium is pretty messy, since there's few uniform naming conventions, and so 
-a lot of special keywords (particularly in the form of Regular Expressions) had to be used in those cases. 
+a lot of special keywords (particularly in the form of Regular Expressions) had to be used in those cases. Going into files, Driver.py 
+is pretty much the 'main' file here, handling most of our web driver operations. HTMLParser.py contains our helper object just to make the code easier to parse, whilst CleanFile.py is for cleaning up our files we've parsed, i.e., dealing with duplicate emails or clearing up empty space.
 
 
 
