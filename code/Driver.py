@@ -94,7 +94,7 @@ try:
         if directory_at == 1: #pharmacy
             new_link = current_page_link[0:37] + sub_directory_link[10:len(sub_directory_link)]
         elif directory_at == 2: #lbjpublic
-            new_link = 2
+            new_link = current_page_link[0:22] + sub_directory_link
         elif directory_at == 5: #mccombsbusiness
             new_link = 3
         elif directory_at == 6: #education
@@ -132,13 +132,16 @@ try:
                         print(subdirectory_links_list)
                         print(current_link)
                         
+                        prev = None
                         for link in subdirectory_links_list:
+                            if prev == link: continue
                             #print(link)
                             sub_link = get_link_formatting(counter, link, current_link)
-                            print(sub_link)
+                            #print(sub_link)
                             driver.get(sub_link)
                             all_tags = BeautifulSoup(driver.page_source, features="html.parser").findAll('a')
                             EP.email_stream(EP.write_to_file, all_tags)
+                            prev = link
 
                         driver.get(current_link)
 

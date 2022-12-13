@@ -148,8 +148,9 @@ class Email_Parser:
     def get_subdirectories(self, page_HTML, tag):
         soup = BeautifulSoup(page_HTML, features="html.parser")
         #regex = re.compile('.*views-element-container.*|.*field.*|.*directory__cards.*|.*block-main-page-content.*|.*view-content.*|.*faculty-bio-view.*|.*block-moody-main-page-content.*')
-        regex = re.compile('.*layout-content.*')
+        regex = re.compile('.*layout-content.*|.*view-content.*')
         div_with_links = soup.find("div", {'class' : regex})
+        #print(div_with_links)
         link_elements = div_with_links.findAll(tag)
         subdirectory_links = list()
 
