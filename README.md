@@ -86,5 +86,10 @@
 The college of liberal arts encapsulates multiple departments (school of anthropology, history, linguistics, etc.). Each indiviudal department can be 
 parsed without using Selenium, however, accessing each faculty page in a timely manner would best be done using Selenium.
 
+#### Additional Notes:
+
+The actual code for the Faculty pages that REQUIRE Selenium is pretty messy, since there's few uniform naming conventions, and so 
+a lot of special keywords (particularly in the form of Regular Expressions) had to be used in those cases. 
+
 
 

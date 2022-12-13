@@ -80,6 +80,8 @@ try:
 #         except FileExistsError:
 #             continue
 
+# Parser for literally everything else besides the College of Liberal Arts
+
     next_page_directories = tuple(["https://cns.utexas.edu/directory/items/1-directory", "https://pharmacy.utexas.edu/directory",
                                     "https://lbj.utexas.edu/faculty-lbj-school-public-affairs", "https://socialwork.utexas.edu/directory/", 
                                     "https://dellmed.utexas.edu/directory?page=1", "https://www.mccombs.utexas.edu/faculty-and-research/faculty-directory/", 
@@ -89,6 +91,7 @@ try:
                             "architecture", "information"])
     DELLMED_NEXT_CONSTANT = "javascript:void(0)"
 
+    # formatting for the subdirectory links, based on the current directory name
     def get_link_formatting(directory_at, sub_directory_link, current_page_link):
         new_link = None
         if directory_at == 1: #pharmacy
@@ -98,7 +101,7 @@ try:
         elif directory_at == 5: #mccombsbusiness
             new_link = current_page_link[0:31] + sub_directory_link
         elif directory_at == 6: #education
-            new_link = 4
+            new_link = current_page_link[0:29] + sub_directory_link
         elif directory_at == 7: #moodycommunication
             new_link = 5
         elif directory_at == 8: #architecture
@@ -122,6 +125,8 @@ try:
 
                     all_tags = BeautifulSoup(driver.page_source, features="html.parser").findAll('a')
                     write_made = EP.email_stream(EP.write_to_file, all_tags)
+
+                    if (counter == 6): write_made = False
 
                     # were any files written ?
                     if write_made == False:
