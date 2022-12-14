@@ -1,5 +1,6 @@
 import os 
 from queue import PriorityQueue
+from HTMLParser import Email_Parser
 
 # file1 = 'mccombsbusiness_foo.txt'
 # file2 = 'mccombsbusiness.txt'
@@ -90,7 +91,7 @@ FILES_TO_READ = get_directory_files(LOCAL_PATH)
 with open("email_files/all_emails.txt", 'x') as dest:
     myList = list()
     merge_and_sort_txtfiles(FILES_TO_READ, myList) # somewhat sorts the list
-    myList.sort() # fully sorts the list
+    myList.sort(key=str.lower) # fully sorts the list
     myMap = {}
     for line in myList:
         if myMap.get(line) is None:
