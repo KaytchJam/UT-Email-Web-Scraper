@@ -1,4 +1,5 @@
 import pandas as pd
+from BitmapIterator import BitmapIterator
 
 newFrame = pd.DataFrame({0:[1, 2, 3],1:[4, 5, 6],2:[7,8,9]})
 print(newFrame)
@@ -47,3 +48,4 @@ ONE_MAPPINGS = tuple([
     'Sociology',
     'Spanish and Portuguese'
 ])
+
