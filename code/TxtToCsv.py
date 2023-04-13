@@ -1,51 +1,32 @@
 import pandas as pd
 from BitmapIterator import BitmapIterator
+import PConstants
 
-newFrame = pd.DataFrame({0:[1, 2, 3],1:[4, 5, 6],2:[7,8,9]})
-print(newFrame)
+# newFrame = pd.DataFrame({0:[1, 2, 3],1:[4, 5, 6],2:[7,8,9]})
+# print(newFrame)
 
-group_bitmap = int(0b11110110011101111000110100101001110)
-print (group_bitmap)
-index = 34
-ZERO_MAPPINGS = tuple([
-    'School of Architecture', 
-    'Cockrell School of Engineering'
-    'Dell Medical School',
-    'College of Fine Arts',
-    'School of Information',
-    'Jackson School of Geosciences',
-    'LBJ School of Public Affairs',
-    'Mccombs School of Business',
-    'Moody School of Communication',
-    'College of Natural Sciences',
-    'College of Pharmacy',
-    'School of Law',
-    'School of Nursing',
-    'Steve Hicks School of Social Work'
-])
+filler = pd.DataFrame({'Department.':[], 'Liberal Arts.':[], 'Inverse.':[]})
+r_map = BitmapIterator.reverse_bitmap(PConstants.GROUP_BITMAP, PConstants.LENGTH)
+zeroIt = BitmapIterator(r_map, PConstants.LENGTH, PConstants.ZERO_MAPPINGS)
+oneIt = BitmapIterator(r_map, PConstants.LENGTH, PConstants.ONE_MAPPINGS, False)
 
-LIBERAL_ARTS = 'College of Liberal Arts'
-ONE_MAPPINGS = tuple([
-    'African and African Disapora Studies',
-    'Air and Space Force Science',
-    'American Studies',
-    'Anthropology',
-    'Asian Studies',
-    'Classics',
-    'Economics',
-    'English',
-    'French and Italian',
-    'Geography and the Environment',
-    'Germanic Studies',
-    'Government',
-    'History',
-    'Linguistics',
-    'Mexican American and Latina/o Studies',
-    'Middle Eastern Studies',
-    'Naval Science',
-    'Rhetoric and Writing',
-    'Slavic and Eurasian Studies',
-    'Sociology',
-    'Spanish and Portuguese'
-])
+index = 0
+COMBINED_SUM = len(PConstants.ZERO_MAPPINGS) + len(PConstants.ONE_MAPPINGS)
+while not zeroIt.at_end or not oneIt.at_end():
+    zeroVal = ['-', None]
+    oneVal = ['-', None]
 
+    if not zeroIt.at_end(): zeroVal = zeroIt.forward_pair()
+    if not oneIt.at_end(): oneVal = oneIt.forward_pair()
+
+    if (not zeroVal[0]) or oneVal[0]:
+        if not zeroVal[0]: filler.loc[index, :] = [zeroVal[1], False, COMBINED_SUM - index - 1]
+        else: filler.loc[index, :] = [oneVal[1], True, COMBINED_SUM - index - 1]
+        index = index + 1
+
+print(filler)
+
+print(filler.groupby('Department.').all())
+
+libs = filler.loc[(filler.loc[:,'Liberal Arts.'] == True)]
+print(libs)
