@@ -5,7 +5,9 @@ import PConstants
 # newFrame = pd.DataFrame({0:[1, 2, 3],1:[4, 5, 6],2:[7,8,9]})
 # print(newFrame)
 
-filler = pd.DataFrame({'Department.':[], 'Liberal Arts.':[], 'Inverse.':[]})
+src_dir = "email_files/"
+
+filler = pd.DataFrame({'Department':[], 'Liberal_Arts':[], 'Inverse':[]})
 r_map = BitmapIterator.reverse_bitmap(PConstants.GROUP_BITMAP, PConstants.LENGTH)
 zeroIt = BitmapIterator(r_map, PConstants.LENGTH, PConstants.ZERO_MAPPINGS)
 oneIt = BitmapIterator(r_map, PConstants.LENGTH, PConstants.ONE_MAPPINGS, False)
