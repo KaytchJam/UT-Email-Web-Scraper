@@ -96,6 +96,7 @@ def extractUsingReplyTo(mbox_string):
 
     return data
 
+# Converts a list of strings into a single string
 def ListToString(li, start_index = 0):
     if not isinstance(li, list):
         raise TypeError("li must be a list")
