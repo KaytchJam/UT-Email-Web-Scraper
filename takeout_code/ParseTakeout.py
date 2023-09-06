@@ -6,34 +6,36 @@ import mimetypes
 from NETStringTools import extractUsingReplyTo
 from NETStringTools import ListToString
 
+# CONSTANTS
 EMAIL_OUTPUT_PATH = 'takeout_files/net_member_emails.csv'
 EMAIL_INPUT_PATH = 'takeout_files/NEW_MEMBER.mbox'
-CONTENT_LOCATOR = 'This is a multi-part message in MIME format.'
-COLUMNS = ['EMAIL', 'FIRSTNAME', 'LASTNAME', 'SMS', 'GENDER']
+COLUMNS = ['EMAIL', 'FIRSTNAME', 'LASTNAME', 'SMS', 'GENDER'] # CSV FILE COLUMN FORMAT
 
-netbox = mb(EMAIL_INPUT_PATH, factory=None, create=False)
-# print(mimetypes.guess_type("EMAIL_INPUT_PATH"))
+netbox = mb(EMAIL_INPUT_PATH, factory=None, create=False) # mailbox object
 
-with open(EMAIL_OUTPUT_PATH, 'w') as csvfile:
+with open(EMAIL_OUTPUT_PATH, 'x') as csvfile:
     # writing to csv file
     fwriter = csv.writer(csvfile, delimiter=",", quotechar="|", quoting=csv.QUOTE_MINIMAL)
     fwriter.writerow(COLUMNS)
 
-    SUBSCRIBER_INFO = ["", "", "", "", 0]
+    # Extraction Loop
+    Subscriber_Info = ["", "", "", "", 0]
     for iterations, message in enumerate(netbox):
         mfrom = message.as_string()
         credentials = extractUsingReplyTo(mfrom)   
 
-        if credentials is None:
-            print("Couldn't find 'Name:' in message")
+        if credentials is None: # "Error Handling" but not really
+            print("Couldn't find 'Reply-To:' in message")
             print(mfrom)
             break
-
+        
+        # Row Insertion
         num_credentials = len(credentials)
-        SUBSCRIBER_INFO[0] = ''.join(credentials[len(credentials) - 1]) # EMAIL EXTRACTION
-        SUBSCRIBER_INFO[1] = ''.join(credentials[0]) # FIRST NAME EXTRACTION
-        if num_credentials > 2: SUBSCRIBER_INFO[2] = ListToString(credentials, 1) # LAST NAME EXTRACTION
-        fwriter.writerow(SUBSCRIBER_INFO)
+        Subscriber_Info[0] = ''.join(credentials[len(credentials) - 1]) # EMAIL EXTRACTION
+        Subscriber_Info[1] = ''.join(credentials[0]) # FIRST NAME EXTRACTION
+        if num_credentials > 2: Subscriber_Info[2] = ListToString(credentials, 1)  # LAST NAME EXTRACTION
+        else: Subscriber_Info[2] = ""
+        fwriter.writerow(Subscriber_Info)
 
 
 
