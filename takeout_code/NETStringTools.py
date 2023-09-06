@@ -1,18 +1,3 @@
-# test = ["Name: Johnny Lawsome\nEmail:\nmarry@utexas.edu\n", "Name: Lucas Blucas\nEmail: gordon1@utexas.edu\n", "Name: Eustass Captain Kidd\nEmail: e_kapkidd@utexas.edu\n"]
-test2 = """Date: Fri, 16 Sep 2022 02:23:12 +0000
-To: bjevanson2 <bjevanson2@gmail.com>, netprojectaustin <netprojectaustin@gmail.com>
-From: Katya <donotreply@wordpress.com>
-Reply-To: Katya <kde624@utexas.edu>
-Subject: New Member for NET !
-Message-ID: <2ONo7qwZbdQX4tkpZjPHhk1YAkokQdeoPjtf68z5xg@wordpress.com>
-X-Automattic-Destination: YmpldmFuc29uMkBnbWFpbC5jb20=
-X-Automattic-Tracking: 0:1:LJEJ1oSUmxghGCHmz0/11Q==.JbvG+pUshPPe1lBeNs5A1Rq+Tp6zjiuJrIcKGswLbUgsRvg+xL26lgyeIuZgrNLP:185671662:933:0
-MIME-Version: 1.0
-Content-Type: multipart/alternative;
- boundary="b1_2ONo7qwZbdQX4tkpZjPHhk1YAkokQdeoPjtf68z5xg"
-Content-Transfer-Encoding: 8bit"""
-
-test3 = "Reply-To: Dana Abdulla Mohamed Ali Selim <danaselim@utexas.edu>"
 
 def string_stream(string, start, end, f):
     while start < end:
@@ -124,14 +109,6 @@ def ListToString(li, start_index = 0):
         s += ''.join(li[ptr])
         ptr += 1
     return s
-
-# output = extractNameAndEmail(test[2])
-# print(output)
-# output = extractUsingReplyTo(test3)
-# print(output)
-# output = extractUsingReplyTo(test2)
-# print(output)
-# print(ListToString(output, 1))
 
 
             
