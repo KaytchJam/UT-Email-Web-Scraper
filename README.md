@@ -1,4 +1,4 @@
-# UT-Email-Web-Scraper
+# _UT-Email-Web-Scraper_
 ### What is this for?
 
 #### Web Scraper for consolidating a bunch of emails from various UT Austin departments. The emails are being collected using the Beautiful Soup and Selenium Python libraries. 
@@ -11,8 +11,8 @@
 - [x] Extracting emails from all the pages (where it can be done without selenium)
 - [x] Figure out In-N-Out Selenium navigation method
 - [x] Extracting emails from most of the Liberal Arts Directories
-- [ ] Adding all the emails to the drive
-- [ ] Figuring out how to automate the email sending process (?)
+- [x] Adding all the emails to the drive
+- [x] Figuring out how to automate the email sending process (?)
 
 ### Checklist:
 - [x] Cockrell School of Engineering
@@ -84,14 +84,24 @@
 
 - The College of Liberal Arts
 
-The college of liberal arts encapsulates multiple departments (school of anthropology, history, linguistics, etc.). Each indiviudal department can be 
-parsed without using Selenium, however, accessing each faculty page in a timely manner would best be done using Selenium.
+The college of liberal arts encapsulates multiple departments (school of anthropology, history, linguistics, etc.). Each indiviudal department can be parsed without using Selenium, however, accessing each faculty page in a timely manner would best be done using Selenium.
 
 #### Additional Notes:
 
-The actual code for the Faculty pages that REQUIRE Selenium is pretty messy, since there's few uniform naming conventions, and so 
-a lot of special keywords (particularly in the form of Regular Expressions) had to be used in those cases. Going into files, Driver.py 
+The actual code for the Faculty pages that REQUIRE Selenium is pretty messy, since there's few uniform naming conventions, and so a lot of special keywords (particularly in the form of Regular Expressions) had to be used in those cases. Going into files, Driver.py 
 is pretty much the 'main' file here, handling most of our web driver operations. HTMLParser.py contains our helper object just to make the code easier to parse, whilst CleanFile.py is for cleaning up our files we've parsed, i.e., dealing with duplicate emails or clearing up empty space.
 
+# _Extract Emails & Names Using Google Takeout_
 
+### What is this for?
+
+#### We need to recover all lost emails during the transition from MailChimp to Brevo.
+
+### TODO List:
+
+- [x] Using Google Takeout to extract emails with the proper tag
+- [x] Learning the mbox format's structure
+- [x] Writing a parser that streams through the mbox file
+- [x] Extract names and emails
+- [x] Writing extracted results to a `.csv` file
 
