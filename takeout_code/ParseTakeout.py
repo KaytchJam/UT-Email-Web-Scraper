@@ -7,8 +7,8 @@ from NETStringTools import extractUsingReplyTo
 from NETStringTools import ListToString
 
 # CONSTANTS
-EMAIL_OUTPUT_PATH = 'takeout_files/net_member_emails.csv'
-EMAIL_INPUT_PATH = 'takeout_files/NEW_MEMBER.mbox'
+EMAIL_OUTPUT_PATH = 'takeout_files/net_kickoff_emails.csv'
+EMAIL_INPUT_PATH = 'takeout_files/KICKOFF.mbox'
 COLUMNS = ['EMAIL', 'FIRSTNAME', 'LASTNAME', 'SMS', 'GENDER'] # CSV FILE COLUMN FORMAT
 
 netbox = mb(EMAIL_INPUT_PATH, factory=None, create=False) # mailbox object
